@@ -120,9 +120,7 @@ describe("Stage III: testint protected /cats endpoint", () => {
     expect(response.status).toBe(200);
   });
   it("should make sure that response.body.url is defined", async () => {
-    const response = await (await request.post("/cats/")).setEncoding(
-      validToken
-    );
+    const response = await request.post("/cats/").send(validToken);
     expect(response.body.url).toBeDefined();
   });
 });
