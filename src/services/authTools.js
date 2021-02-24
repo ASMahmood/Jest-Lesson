@@ -4,7 +4,7 @@ const verifyAccess = (token) =>
   new Promise((res, rej) =>
     jwt.verify(token, process.env.ACCESS_SECRET, (err, decodedToken) => {
       if (err) rej(err);
-      res("VALID_TOKEN");
+      res(true);
     })
   );
 
@@ -13,7 +13,7 @@ const generateAccessToken = (payload) =>
     jwt.sign(
       payload,
       process.env.ACCESS_SECRET,
-      { expiresIn: "15m" },
+      { expiresIn: "1h" },
       (err, token) => {
         if (err) rej(err);
         res(token);

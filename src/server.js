@@ -1,16 +1,18 @@
-require("dotenv").config()
+require("dotenv").config();
 
-const express = require("express")
-const server = new express()
+const express = require("express");
+const server = new express();
 
-const userRouter = require("./services/users")
+const userRouter = require("./services/users");
+const catsRouter = require("./services/cats");
 
-server.use(express.json())
+server.use(express.json());
 
 server.get("/test", (req, res) => {
-    res.status(200).send({ message: "Test success" })
-})
+  res.status(200).send({ message: "Test success" });
+});
 
-server.use("/users", userRouter)
+server.use("/users", userRouter);
+server.use("/cats", catsRouter);
 
-module.exports = server
+module.exports = server;

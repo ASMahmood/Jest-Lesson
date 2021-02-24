@@ -86,7 +86,7 @@ describe("Stage II: testing user creation and login", () => {
 
     const { token } = response.body;
     const verified = await verifyAccess(token);
-    expect(verified).toBe(validToken);
+    expect(verified).toBe(true);
   });
 
   it("should NOT return a valid token when loggin in with INCORRECT credentials", async () => {
@@ -109,3 +109,20 @@ describe("Stage II: testing user creation and login", () => {
 });
 
 // III: Testing protected endpoints
+
+describe("Stage III: testint protected /cats endpoint", () => {
+  const validToken = {
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxvIiwiaWF0IjoxNjE0MTgxMjMzLCJleHAiOjE2MTQxODQ4MzN9.4qldef7SqzfSqEIrrgFnywbLAnFlo29q18LuIzMAHTI",
+  };
+  it("should return a 200 code when accepted", async () => {
+    const response = await request.post("/cats/").send(validToken);
+    expect(response.status).toBe(200);
+  });
+  it("should make sure that response.body.url is defined", async () => {
+    const response = await (await request.post("/cats/")).setEncoding(
+      validToken
+    );
+    expect(response.body.url).toBeDefined();
+  });
+});
