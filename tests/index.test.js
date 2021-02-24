@@ -3,7 +3,10 @@ const request = require("supertest")(server);
 const mongoose = require("mongoose");
 
 const UserSchema = require("../src/services/users/schema");
-const { verifyAccess } = require("../src/services/authTools");
+const {
+  verifyAccess,
+  generateAccessToken,
+} = require("../src/services/authTools");
 const UserModel = require("mongoose").model("User", UserSchema);
 
 beforeAll((done) => {
