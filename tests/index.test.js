@@ -123,4 +123,8 @@ describe("Stage III: testint protected /cats endpoint", () => {
     const response = await request.post("/cats/").send(validToken);
     expect(response.body.url).toBeDefined();
   });
+  it("should make sure that response.body.url is a string", async () => {
+    const response = await request.post("/cats/").send(validToken);
+    expect(typeof response.body.url).toBe("string");
+  });
 });
